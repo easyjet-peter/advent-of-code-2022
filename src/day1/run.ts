@@ -7,5 +7,29 @@ const readLines = (filePath: string) : string[] => {
     return data;
 }
 
+type Elf = {
+    calories: number[],
+    total: number
+}
+
+const calculate = (accumulator: Elf[], currentValue: string) : Elf[]  => {
+    if(currentValue === ''){
+        accumulator.push({calories: [], total: 0});
+        return accumulator;
+    }
+    accumulator[accumulator.length-1].calories.push(parseInt(currentValue));
+    accumulator[accumulator.length-1].total += parseInt(currentValue)
+    return accumulator;
+}
+
 const lines = readLines('./src/day1/input.txt')
 console.log(`lines ${lines.length}`);
+
+const totalCaloriesPerElf = lines.reduce(calculate, [{calories: [], total: 0}]);
+
+const maxTotalCalories = Math.max(...totalCaloriesPerElf.map(elf => elf.total));
+
+console.log(maxTotalCalories)
+
+
+
