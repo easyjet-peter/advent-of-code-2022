@@ -29,7 +29,12 @@ const totalCaloriesPerElf = lines.reduce(calculate, [{calories: [], total: 0}]);
 
 const maxTotalCalories = Math.max(...totalCaloriesPerElf.map(elf => elf.total));
 
-console.log(maxTotalCalories)
+console.log(`Answer Day 1 (part 1): ${maxTotalCalories}`)
 
+const elfCaloriesDescending = totalCaloriesPerElf.sort((a, b) => b.total - a.total)
 
+const totalCaloriesOfTop3Elfs = elfCaloriesDescending.slice(0, 3)
+                    .map(elf => elf.total)
+                    .reduce((acc, cur) => acc + cur, 0); 
 
+console.log(`Answer Day 1 (part 2): ${totalCaloriesOfTop3Elfs}`)
